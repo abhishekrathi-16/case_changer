@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-bar{
+    width: 50%;
+    height: 3rem;
+    font-size: 2rem;
+}
+
+.button-set{
+    margin: 4px;
+}
+
+button{
+    margin: 6px;
+}
+
+.output-container{
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+}
+
+#result{
+    margin-left: 4px;
+}

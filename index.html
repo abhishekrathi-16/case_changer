@@ -5,12 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="cryptomus" content="9d677908" />
     <title>Document</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <!-- <link rel="stylesheet" href="./styles.css" /> -->
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+        padding: 0px;
+        margin: 0px;
+      }
+
+      body {
+        background-color: rgb(157, 246, 231);
+      }
+
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .text-bar {
+        width: 30%;
+        height: 6rem;
+        font-size: 2rem;
+        border-radius: 4px;
+        padding: 1rem;
+      }
+
+      .button-set {
+        margin: 4px;
+      }
+
+      button {
+        margin: 8px;
+        padding: 6px;
+        background: #4297ff;
+        border: none;
+        border-radius: 4px;
+        box-shadow: 2px 2px #b5b5b5;
+        cursor: pointer;
+      }
+
+      .output-container {
+        display: flex;
+        flex-direction: column;
+        font-size: 2rem;
+        margin-top: 3rem;
+        align-items: center;
+        justify-content: center;
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+
+      #result {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 4px;
+        padding: 0px;
+        background-color: #fff;
+        height: 5rem;
+        width: auto;
+        text-align: center;
+      }
+    </style>
     <script
       src="https://kit.fontawesome.com/fea6406484.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./script.js" defer></script>
+    <!-- <script src="./script.js" defer></script> -->
   </head>
   <body>
     <div class="container">
@@ -23,9 +87,49 @@
         </button>
       </div>
       <div class="output-container">
-        <span>Result: </span>
+        <!-- <span>Result </span> -->
         <div id="result"></div>
       </div>
     </div>
+    <script>
+      const inputText = document.getElementById("input-text");
+      const result = document.getElementById("result");
+      const lowerButton = document.getElementById("lower-button");
+      const upperButton = document.getElementById("upper-button");
+      const speakButton = document.getElementById("speak");
+
+      inputText.addEventListener("input", () => {
+        result.innerText = inputText.value;
+      });
+
+      // change case
+      upperButton.addEventListener("click", () => {
+        result.innerText = inputText.value.toUpperCase();
+        inputText.value = inputText.value.toUpperCase();
+      });
+
+      lowerButton.addEventListener("click", () => {
+        result.innerText = inputText.value.toLowerCase();
+        inputText.value = inputText.value.toLowerCase();
+      });
+
+      // read aloud when clicked
+      speakButton.addEventListener("click", () => {
+        speak();
+      });
+
+      function speak() {
+        const text = result.innerText;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.voice = getVoice();
+        console.log(utterance);
+        speechSynthesis.speak(utterance);
+      }
+
+      function getVoice() {
+        const voiceIndex = 1;
+        return speechSynthesis.getVoices()[voiceIndex];
+      }
+    </script>
   </body>
 </html>
